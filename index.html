@@ -1,0 +1,69 @@
+
+<!DOCTYPE html>
+<html lang="si">
+<head>
+  <meta charset="UTF-8">
+  <title>බහුපියවර Form එක</title>
+</head>
+<body>
+  <form id="multiStepForm">
+    <input type="text" placeholder="මුල් නම"><br>
+    <input type="text" placeholder="අවසාන් නම"><br>
+    <input type="date"><br>
+    <input type="text" placeholder="ජාතික හැඳුනුම්පත් අංකය"><br>
+    <input type="text" placeholder="විවාහක / අවිවාහක තත්ත්වය"><br>
+    <input type="text" placeholder="ඇපකරු 1 නම"><br>
+    <input type="text" placeholder="ඇපකරු 1 දුරකථන අංකය"><br>
+    <input type="text" placeholder="ඇපකරු 2 නම"><br>
+    <input type="text" placeholder="ඇපකරු 2 දුරකථන අංකය"><br>
+    <input type="text" placeholder="ලිපිනය 1"><br>
+    <input type="text" placeholder="ලිපිනය 2"><br>
+    <input type="text" placeholder="ලිපිනය 3"><br>
+    <input type="text" placeholder="රැකියාව"><br>
+    <input type="text" placeholder="වැඩ කරන ස්ථානය"><br>
+    <input type="text" placeholder="දුරකථන අංකය"><br>
+    <input type="text" placeholder="ගිණුම් හිමියාගේ නම"><br>
+    <input type="text" placeholder="ගිණුම් අංකය"><br>
+    <input type="text" placeholder="බැංකුව"><br>
+    <input type="text" placeholder="ශාඛාව"><br>
+    <button type="submit">යවන්න</button>
+  </form>
+
+  <script>
+    document.getElementById("multiStepForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const data = {
+        firstName: document.querySelector('input[placeholder="මුල් නම"]').value,
+        lastName: document.querySelector('input[placeholder="අවසාන් නම"]').value,
+        dob: document.querySelector('input[type="date"]').value,
+        nic: document.querySelector('input[placeholder*="හැඳුනුම්පත්"]').value,
+        status: document.querySelector('input[placeholder*="විවාහක"]').value,
+        guarantor1Name: document.querySelector('input[placeholder="ඇපකරු 1 නම"]').value,
+        guarantor1Phone: document.querySelector('input[placeholder="ඇපකරු 1 දුරකථන අංකය"]').value,
+        guarantor2Name: document.querySelector('input[placeholder="ඇපකරු 2 නම"]').value,
+        guarantor2Phone: document.querySelector('input[placeholder="ඇපකරු 2 දුරකථන අංකය"]').value,
+        address1: document.querySelector('input[placeholder="ලිපිනය 1"]').value,
+        address2: document.querySelector('input[placeholder="ලිපිනය 2"]').value,
+        address3: document.querySelector('input[placeholder="ලිපිනය 3"]').value,
+        job: document.querySelector('input[placeholder="රැකියාව"]').value,
+        workplace: document.querySelector('input[placeholder="වැඩ කරන ස්ථානය"]').value,
+        workPhone: document.querySelector('input[placeholder="දුරකථන අංකය"]').value,
+        accountHolder: document.querySelector('input[placeholder*="හිමියාගේ"]').value,
+        accountNumber: document.querySelector('input[placeholder*="ගිණුම් අංකය"]').value,
+        bank: document.querySelector('input[placeholder="බැංකුව"]').value,
+        branch: document.querySelector('input[placeholder="ශාඛාව"]').value,
+      };
+
+      fetch("https://script.google.com/macros/s/AKfycbxCLd_rtX7FwW-ItW2iUSBBbVSUvg4hJupWsMXIpmEUJWbhmtZ8GeGOTg2JXUlv8tU/exec", {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: { "Content-Type": "application/json" }
+      })
+      .then(res => res.text())
+      .then(res => alert("දත්ත Google Sheet එකට යැවිණි!"))
+      .catch(err => alert("දෝෂයකි: " + err));
+    });
+  </script>
+</body>
+</html>
